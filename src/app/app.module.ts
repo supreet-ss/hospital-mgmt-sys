@@ -20,6 +20,8 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddDoctorComponent } from './component/dashboard/doctor/add-doctor/add-doctor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DeleteDoctorComponent } from './component/dashboard/doctor/delete-doctor/delete-doctor.component';
+import { ViewDoctorComponent } from './component/dashboard/doctor/view-doctor/view-doctor.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DoctorComponent,
     PatientComponent,
     SidebarComponent,
-    AddDoctorComponent
+    AddDoctorComponent,
+    DeleteDoctorComponent,
+    ViewDoctorComponent
   ],
   imports: [
     BrowserModule,
