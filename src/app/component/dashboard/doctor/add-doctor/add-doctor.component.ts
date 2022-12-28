@@ -50,8 +50,6 @@ export class AddDoctorComponent implements OnInit {
       department:[this.department,[Validators.required]],
       birthdate:[this.birthdate,[Validators.required]],
       qualification:[this.qualification,[Validators.required]]
-
-
     })
   }
 
@@ -63,5 +61,4 @@ export class AddDoctorComponent implements OnInit {
     this.dialogRef.close(this.form.value);
     
   }
-
 }

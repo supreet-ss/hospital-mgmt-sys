@@ -15,100 +15,100 @@ import { DeleteDoctorComponent } from './delete-doctor/delete-doctor.component';
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
-  doctorsArr : any[]=[];
-  displayedColumns: string[] = ['name', 'mobile', 'email','department','gender','action'];
+
+  doctorsArr : any[] = [];
+  displayedColumns: string[] = ['name', 'mobile', 'email', 'department', 'gender','action'];
   dataSource!: MatTableDataSource<Doctor>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-
   constructor(
-    public dialog: MatDialog,
-    private dataApi:DataService, 
-    private _snackBar:MatSnackBar
-    ) { }
+    public dialog : MatDialog,
+    private dataApi : DataService,
+    private _snackBar : MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.getAllDoctors();
   }
 
-  addDoctor(){
+  addDoctor() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=true;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      title:'Register a Doctor',
-      buttonName:'Register'
+      title : 'Register doctor',
+      buttonName : 'Register'
     }
 
     const dialogRef = this.dialog.open(AddDoctorComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data=>{
-      if(data){
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
         this.dataApi.addDoctor(data);
-        this.openSnackBar("Registration of Doctor was successful","OK")
+        this.openSnackBar("Registration of doctor is successful.", "OK")
       }
     })
   }
 
-  editDoctor(row:any){
-    if(row.id==null || row.name==null){
+  editDoctor(row : any) {
+    if(row.id == null || row.name == null) {
       return;
     }
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=true;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data =row;
-    dialogConfig.data.title="Edit Doctor";
-    dialogConfig.data.buttonName="Update";
-    dialogConfig.data.birthdate=row.birthdate.toDate();
+    dialogConfig.data = row;
+    dialogConfig.data.title = "Edit doctor";
+    dialogConfig.data.buttonName = "Update";
+    dialogConfig.data.birthdate = row.birthdate.toDate();
 
     const dialogRef = this.dialog.open(AddDoctorComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data=>{
-      if(data){
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
         this.dataApi.updateDoctor(data);
-        this.openSnackBar("Doctor data was updated successfully","OK")
+        this.openSnackBar("Doctor is updated successfully.", "OK")
       }
     })
   }
 
-  deleteDoctor(row:any){
+  deleteDoctor(row : any) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=false;
+    dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      title:'Delete Doctor',
-      doctorName:row.name
+      title : 'Delete doctor',
+      doctorName : row.name
     }
 
     const dialogRef = this.dialog.open(DeleteDoctorComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data=>{
-      if(data){
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
         this.dataApi.deleteDoctor(row.id);
-        this.openSnackBar("Data of Doctor was deleted successfully","OK")
+        this.openSnackBar("Doctor deleted successfully.", "OK")
       }
     })
   }
 
-  getAllDoctors(){
-    this.dataApi.getAllDoctors().subscribe(res=>{
-      this.doctorsArr=res.map((e:any)=>{
-        const data =e.payload.doc.data();
-        data.id=e.payload.doc.id;
+  getAllDoctors() {
+    this.dataApi.getAllDoctors().subscribe(res => {
+      this.doctorsArr = res.map((e : any) => {
+        const data = e.payload.doc.data();
+        data.id = e.payload.doc.id;
         return data;
       })
-      console.log(this.doctorsArr);
-      this.dataSource=new MatTableDataSource(this.doctorsArr);
+
+      this.dataSource = new MatTableDataSource(this.doctorsArr);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
-
-    
   }
 
-  viewDoctor(row :any){
+  viewDoctor(row : any) {
     window.open('/dashboard/doctor/'+row.id,'_blank');
-
   }
 
   openSnackBar(message: string, action: string) {
@@ -123,6 +123,4 @@ export class DoctorComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 }

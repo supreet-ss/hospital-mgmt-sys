@@ -65,7 +65,5 @@ import {MatMenuModule} from '@angular/material/menu';
     MatPaginatorModule,
     MatMenuModule
   ]
-
-
 })
 export class MaterialModule { }
