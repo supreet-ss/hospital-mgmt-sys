@@ -25,6 +25,8 @@ import { ViewDoctorComponent } from './component/dashboard/doctor/view-doctor/vi
 import { AddPatientComponent } from './component/dashboard/patient/add-patient/add-patient.component';
 import { ViewPatientComponent } from './component/dashboard/patient/view-patient/view-patient.component';
 import { DeletePatientComponent } from './component/dashboard/patient/delete-patient/delete-patient.component';
+import { LoginComponent } from './component/auth/login/login.component';
+import { AuthComponent } from './shared/service/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { DeletePatientComponent } from './component/dashboard/patient/delete-pat
     ViewDoctorComponent,
     AddPatientComponent,
     ViewPatientComponent,
-    DeletePatientComponent
+    DeletePatientComponent,
+    LoginComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
